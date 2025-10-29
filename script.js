@@ -16,18 +16,21 @@ document.addEventListener('keydown', (event) => {
     // 2. Metne sıradaki harfi ekle
     currentText += nextLetter;
     
-    // 3. Çıktı alanını güncelle
-    outputDiv.textContent = currentText;
-
-    // 4. Sayacı bir sonraki harfe taşı
+    // 3. Sayacı bir sonraki harfe taşı
     letterIndex++;
 
-    // 5. Eğer sayaç kelimenin sonuna geldiyse (yani 'Y' harfinden sonra)
-    // sayacı sıfırla ki kelime en baştan (yani 'W' harfinden) tekrar başlasın.
+    // 4. Eğer sayaç kelimenin sonuna geldiyse (yani 'Y' harfi eklendikten sonra)
+    // hem sayacı sıfırla hem de bir boşluk karakteri ekle.
     if (letterIndex >= targetWord.length) {
+        // Metne bir boşluk ekle ki kelime ayrılmış olsun
+        currentText += " "; 
+        // Sayacı sıfırla ki W harfinden tekrar başlasın
         letterIndex = 0;
     }
+    
+    // 5. Çıktı alanını güncelle
+    outputDiv.textContent = currentText;
 });
 
 // Başlangıç mesajı
-outputDiv.textContent = "Başlamak için klavyede herhangi bir tuşa basın ve Wednesday'i harf harf oluşturun!";
+outputDiv.textContent = "Wednesday'i harf harf oluşturmak için klavyede herhangi bir tuşa basın!";
