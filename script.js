@@ -1,5 +1,8 @@
-// Global değişkenlerimizi tanımlayalım
+// Global sabitimiz
 const targetWord = "WEDNESDAY";
+// Kelimedeki hangi harfin sıradaki olduğunu tutacak sayacımız
+let letterIndex = 0; 
+// Metin alanımızın içeriği
 let currentText = "";
 
 // Çıktı alanını (output div'ini) DOM'dan alalım
@@ -7,27 +10,24 @@ const outputDiv = document.getElementById('output');
 
 // Klavye tuşuna basıldığında çalışacak fonksiyon
 document.addEventListener('keydown', (event) => {
-    // Sadece harf tuşları için kontrol edebiliriz, ancak basitlik için herhangi bir tuşu kabul edelim.
-    // Örneğin, 'a' ile 'z' arasındaki tuşlar veya büyük/küçük harf olabilir.
+    // 1. Kelimenin sıradaki harfini al
+    const nextLetter = targetWord[letterIndex];
+
+    // 2. Metne sıradaki harfi ekle
+    currentText += nextLetter;
     
-    // Klavyeden basılan tuşu kontrol etme:
-    // Sadece alfanümerik tuşlar veya boşluk tuşu gibi anlamlı tuşlar için ekleme yapabiliriz.
-    // Şimdilik basılan her tuşu, 'bir harf daha eklendi' şeklinde kabul ediyoruz.
-    
-    // Her tuşa basışta metne 'WEDNESDAY' kelimesini ekle
-    currentText += targetWord;
-    
-    // Çıktı alanını güncelle
+    // 3. Çıktı alanını güncelle
     outputDiv.textContent = currentText;
 
-    // Metin çok uzarsa tarayıcıyı zorlamamak için küçük bir sınırlama eklenebilir.
-    // Ancak siz 'sınırsız' dediğiniz için bu kısım opsiyoneldir.
-    /*
-    if (currentText.length > 5000) {
-        currentText = currentText.substring(currentText.length - 5000);
+    // 4. Sayacı bir sonraki harfe taşı
+    letterIndex++;
+
+    // 5. Eğer sayaç kelimenin sonuna geldiyse (yani 'Y' harfinden sonra)
+    // sayacı sıfırla ki kelime en baştan (yani 'W' harfinden) tekrar başlasın.
+    if (letterIndex >= targetWord.length) {
+        letterIndex = 0;
     }
-    */
 });
 
-// Başlangıçta kullanıcıya ne yapması gerektiğini belirtmek için bir mesaj gösterebiliriz (opsiyonel)
-outputDiv.textContent = "Tıklamalarınızı bekliyorum...";
+// Başlangıç mesajı
+outputDiv.textContent = "Başlamak için klavyede herhangi bir tuşa basın ve Wednesday'i harf harf oluşturun!";
